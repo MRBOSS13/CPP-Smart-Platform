@@ -1,0 +1,78 @@
+#include <iostream>
+#include "AIAssistant.h"
+#include "ErrorBank.h"
+#include "GameSandbox.h"
+#include "AutoDocSystem.h"
+
+using namespace std;
+
+// ==========================================
+// الواجهة الرئيسية للمنصة (تشغيل الملفات المرتبطة)
+// ==========================================
+class SmartPlatform {
+private:
+    AIAssistant assistant;
+    ErrorBank errorBank;
+    GameSandbox gameSandbox;
+    AutoDocSystem autoDoc;
+
+public:
+    void runPlatform() {
+        int choice = 0;
+        do {
+            cout << "\n========================================\n";
+            cout << "       منصة المبرمج الذكي (C++ Platform) \n";
+            cout << "========================================\n";
+            cout << "1. بدء مشروع جديد بمساعدة الذكاء الاصطناعي\n";
+            cout << "2. فحص كود وتحديد مكان الخطأ في السطر (Line)\n";
+            cout << "3. تشغيل بيئة الألعاب التفاعلية (Game Sandbox)\n";
+            cout << "4. نظام توليد التعليقات التلقائي (Auto-Doc)\n";
+            cout << "5. الخروج من المنصة\n";
+            cout << "أدخل خيارك: ";
+
+            if (!(cin >> choice)) {
+                cout << "خطأ في الإدخال! يرجى إدخال رقم صحيح.\n";
+                cin.clear();
+                cin.ignore(10000, '\n');
+                continue;
+            }
+
+            switch (choice) {
+                case 1: {
+                    cin.ignore();
+                    assistant.startDevelopment();
+                    int projectType;
+                    cin >> projectType;
+                    
+                    cin.ignore();
+                    string details;
+                    cout << "اكتب وصفاً قصيراً أو فكرة مشروعك: ";
+                    getline(cin, details);
+
+                    assistant.generateSuggestedCode(details);
+                    break;
+                }
+                case 2:
+                    errorBank.checkLineError();
+                    break;
+                case 3:
+                    gameSandbox.startMiniGame();
+                    break;
+                case 4:
+                    autoDoc.generateDocs();
+                    break;
+                case 5:
+                    cout << "\nشكراً لاستخدامك المنصة. نتمنى لك التوفيق!\n";
+                    break;
+                default:
+                    cout << "\nخيار غير صحيح، يرجى المحاولة مرة أخرى.\n";
+            }
+        } while (choice != 5);
+    }
+};
+
+int main() {
+    SmartPlatform platform;
+    platform.runPlatform();
+    return 0;
+}

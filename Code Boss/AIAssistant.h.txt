@@ -1,0 +1,36 @@
+#ifndef AI_ASSISTANT_H
+#define AI_ASSISTANT_H
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// ==========================================
+// وحدة الذكاء الاصطناعي (المساعد الذكي للطلاب)
+// ==========================================
+class AIAssistant {
+public:
+    void startDevelopment() {
+        cout << "\n[المساعد الذكي]: مرحباً بك! قبل أن نبدأ بالتطوير، ما هو المشروع الذي تود بناءه اليوم؟\n";
+        cout << "1. لعبة برمجية بسيطة\n";
+        cout << "2. أداة مساعدة للمبرمجين\n";
+        cout << "3. نظام إدارة طلاب أو بيانات\n";
+        cout << "اختر رقم نوع المشروع: ";
+    }
+
+    void generateSuggestedCode(const string& idea) {
+        cout << "\n----------------------------------------\n";
+        cout << " [AI] جاري تحليل فكرتك: (" << idea << ") وإعداد كود مبسط...\n";
+        cout << "----------------------------------------\n";
+        cout << "// كود C++ جاهز ونظيف لمشروعك:\n";
+        cout << "#include <iostream>\nusing namespace std;\n\n";
+        cout << "int main() {\n";
+        cout << "    cout << \"تم بدء مشروعك بنجاح! جاهز للتطوير.\" << endl;\n";
+        cout << "    return 0;\n";
+        cout << "}\n";
+        cout << "----------------------------------------\n";
+    }
+};
+
+#endif // AI_ASSISTANT_H

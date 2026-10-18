@@ -1,0 +1,50 @@
+#ifndef AUTO_DOC_SYSTEM_H
+#define AUTO_DOC_SYSTEM_H
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// ==========================================
+// وحدة نظام توليد التعليقات التلقائي (Auto-Doc)
+// ==========================================
+class AutoDocSystem {
+public:
+    void generateDocs() {
+        cout << "\n========================================\n";
+        cout << "    نظام توليد التعليقات التلقائي (Auto-Doc)\n";
+        cout << "========================================\n";
+        cout << "أدخل السطر البرمجي أو الكود الذي تريد توثيقه وإضافة التعليقات له: ";
+        string snippet;
+        cin.ignore();
+        getline(cin, snippet);
+
+        cout << "\n[الكود مع التعليقات التلقائية باللغة العربية]:\n";
+        cout << "----------------------------------------\n";
+        
+        if (snippet.find("cout") != string::npos) {
+            cout << "// أمر طباعة لإظهار النص أو النتيجة على الشاشة للمستخدم\n";
+            cout << snippet << ";\n";
+        }
+        else if (snippet.find("cin") != string::npos) {
+            cout << "// أمر إدخال لاستقبال البيانات أو القيم المدخلة من لوحة المفاتيح\n";
+            cout << snippet << ";\n";
+        }
+        else if (snippet.find("for") != string::npos) {
+            cout << "// حلقة تكرارية لتنفيذ الأوامر عدة مرات بشكل متكرر\n";
+            cout << snippet << " {\n    // ضع الأوامر هنا\n}\n";
+        }
+        else if (snippet.find("if") != string::npos) {
+            cout << "// شرط برمجي لفحص حالة معينة واتخاذ قرار بناءً عليها\n";
+            cout << snippet << " {\n    // التنفيذ في حال تحقق الشرط\n}\n";
+        }
+        else {
+            cout << "// سطر برمجي عام لتعريف متغيرات أو تنفيذ عملية حسابية/منطقية\n";
+            cout << snippet << ";\n";
+        }
+        cout << "----------------------------------------\n";
+    }
+};
+
+#endif // AUTO_DOC_SYSTEM_H

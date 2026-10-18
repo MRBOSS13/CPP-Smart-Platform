@@ -1,0 +1,51 @@
+#ifndef ERROR_BANK_H
+#define ERROR_BANK_H
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// ==========================================
+// وحدة بنك الأخطاء وتحديد مكان الخطأ بدقة
+// ==========================================
+class ErrorBank {
+public:
+    void checkLineError() {
+        int lineNum;
+        string codeSnippet;
+        
+        cout << "\n========================================\n";
+        cout << "    فاحص الأخطاء الذكي وتحديد السطر (Line)\n";
+        cout << "========================================\n";
+        cout << "أدخل رقم السطر (Line Number) الذي يظهر فيه الخطأ: ";
+        cin >> lineNum;
+        
+        cin.ignore();
+        cout << "اكتب الكود الموجود في هذا السطر أو جزءاً منه: ";
+        getline(cin, codeSnippet);
+
+        cout << "\n[تحليل النظام للسطر " << lineNum << "]:\n";
+        cout << "----------------------------------------\n";
+
+        if (codeSnippet.find("cout") != string::npos && codeSnippet.back() != ';') {
+            cout << "❌ خطأ في السطر " << lineNum << ": نسيت وضع الفاصلة المنقطعة (;) في نهاية أمر الطباعة.\n";
+            cout << "💡 الحل: أضف علامة (;) في نهاية السطر ليصبح هكذا: " << codeSnippet << ";\n";
+        }
+        else if (codeSnippet.find("int main") != string::npos && codeSnippet.find("{") == string::npos) {
+            cout << "❌ خطأ في السطر " << lineNum << ": نسيت فتح قوس بداية الدالة '{'.\n";
+            cout << "💡 الحل: أضف قوس البداية ليصبح: int main() {\n";
+        }
+        else if (codeSnippet.find("cin") != string::npos && codeSnippet.back() != ';') {
+            cout << "❌ خطأ في السطر " << lineNum << ": نسيت وضع الفاصلة المنقطعة (;) بعد أمر الإدخال.\n";
+            cout << "💡 الحل: أضف (;) في نهاية السطر.\n";
+        }
+        else {
+            cout << "🔍 تحليل عام للسطر " << lineNum << " (" << codeSnippet << "):\n";
+            cout << "تأكد من صحة كتابة أسماء الدوال، تعريف المتغيرات، وإغلاق الأقواس أو علامات التنصيص بشكل صحيح.\n";
+        }
+        cout << "----------------------------------------\n";
+    }
+};
+
+#endif // ERROR_BANK_H

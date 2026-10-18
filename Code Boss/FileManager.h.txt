@@ -1,0 +1,45 @@
+#ifndef FILE_MANAGER_H
+#define FILE_MANAGER_H
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+// ==========================================
+// وحدة إدارة الملفات (حفظ وقراءة السجلات)
+// ==========================================
+class FileManager {
+public:
+    // حفظ التقرير أو السجل في ملف
+    void saveLog(const string& logContent) {
+        ofstream outFile("platform_logs.txt", ios::app); // ios::app للإضافة في نهاية الملف
+        if (outFile.is_open()) {
+            outFile << logContent << "\n----------------------------------------\n";
+            outFile.close();
+            cout << "🟢 تم حفظ السجل بنجاح في الملف (platform_logs.txt)!\n";
+        } else {
+            cout << "🔴 خطأ: تعذر فتح الملف للحفظ.\n";
+        }
+    }
+
+    // عرض السجلات المحفوظة سابقاً
+    void readLogs() {
+        ifstream inFile("platform_logs.txt");
+        string line;
+        cout << "\n========================================\n";
+        cout << "       سجل النشاطات والملاحظات المحفوظة \n";
+        cout << "========================================\n";
+        if (inFile.is_open()) {
+            while (getline(inFile, line)) {
+                cout << line << endl;
+            }
+            inFile.close();
+        } else {
+            cout << "⚠️ لا يوجد سجلات محفوظة حالياً أو تعذر فتح الملف.\n";
+        }
+    }
+};
+
+#endif // FILE_MANAGER_H
